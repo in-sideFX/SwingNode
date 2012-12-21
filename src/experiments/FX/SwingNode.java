@@ -1,5 +1,6 @@
 package experiments.FX;
 
+import com.sun.javafx.property.adapter.PropertyDescriptor;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dialog;
@@ -174,11 +175,12 @@ public class SwingNode extends Region {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        jDialog.setVisible(t1.booleanValue());
+                        //jDialog.setVisible(t1.booleanValue());
                     }
                 });
             }
         });
+        
         /*
          * Stage has focus
          */
@@ -192,6 +194,18 @@ public class SwingNode extends Region {
                         setSwingComponentAlwaysOnTop(newValue.booleanValue());
                     }
                 });
+            }
+        });
+        
+        /*
+         * Node visibility
+         */       
+        super.
+        visibleProperty().addListener(new ChangeListener<Boolean>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+                jDialog.setVisible(t1.booleanValue());
             }
         });
     }
@@ -226,6 +240,16 @@ public class SwingNode extends Region {
         jDialog.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
+                // To ensure Stage to be set to front at the same time as Swing
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        
+                        stage.toFront();
+                        stage.setFocused(true);
+                    }
+                });
+
             }
 
             @Override
@@ -316,7 +340,7 @@ public class SwingNode extends Region {
 
     public void dispose() {
         removeAllListeners();
-        
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

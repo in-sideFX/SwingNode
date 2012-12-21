@@ -19,7 +19,7 @@ public class SwingComponent extends JPanel{
         super.setLayout(new BorderLayout(5,5));
         //setBackground(Color.CYAN);
         JTree jTree = new JTree();
-        //jTree.setDragEnabled(true);
+        jTree.setDragEnabled(true);
         DefaultMutableTreeNode      root = new DefaultMutableTreeNode("JTree");
         DefaultMutableTreeNode      parent;
 
