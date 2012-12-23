@@ -175,7 +175,7 @@ public class SwingNode extends Region {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        //jDialog.setVisible(t1.booleanValue());
+                        jDialog.setVisible(t1.booleanValue());
                     }
                 });
             }
